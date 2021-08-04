@@ -29,6 +29,15 @@ public class UserController {
         return "login";
     }
 
+    /**
+     * 登录功能
+     * @param username
+     * @param userPassword
+     * @param valideCode
+     * @param session
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/doLogin")
     public String login(String username,
                         String userPassword,
@@ -51,5 +60,33 @@ public class UserController {
             }
         }
         return "login";
+    }
+
+    /**
+     * 跳转到注册页面
+     * @return
+     */
+    @RequestMapping(value = "/toregesiter")
+    public String toRegister() {
+        return "register";
+    }
+
+    /**
+     * 注册功能
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/userRegister")
+    public String userRegister(User user, String valideCode, HttpSession session, Model model) {
+        //只能注册普通用户
+        user.setUserisadmin(0);
+        String randomCode = (String) session.getAttribute("vrifyCode"); //产生的随机验证码
+        if (!valideCode.equals(randomCode)) { //验证码不一致
+            model.addAttribute("errorMsg","验证码输入错误！");
+        } else {
+            this.userService.userRegister(user);
+            return "redirect:/login";
+        }
+        return "register";
     }
 }

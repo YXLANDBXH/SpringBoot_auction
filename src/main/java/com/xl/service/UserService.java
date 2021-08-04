@@ -11,4 +11,6 @@ import java.util.List;
 public interface UserService {
     //登录
     List<User> loginByUsernameAndPwd(String username,String userPassword);
+    //注册
+    void userRegister(User user);
 }

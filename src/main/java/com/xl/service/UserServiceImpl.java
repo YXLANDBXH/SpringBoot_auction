@@ -32,4 +32,13 @@ public class UserServiceImpl implements UserService {
         List<User> userList = this.userMapper.selectByExample(userExample);
         return userList;
     }
+
+    /**
+     * 注册功能
+     * @param user
+     */
+    @Override
+    public void userRegister(User user) {
+        this.userMapper.insert(user);
+    }
 }
