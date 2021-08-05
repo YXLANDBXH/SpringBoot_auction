@@ -50,10 +50,11 @@ public class UserController {
         } else {
             List<User> userList = this.userService.loginByUsernameAndPwd(username,userPassword);
             if (userList != null && userList.size() > 0) { //登录成功
+                User user = userList.get(0);
                 //将用户信息存在session中
-                session.setAttribute("user_session",userList);
+                session.setAttribute("user",user);
                 //跳转到首页
-                return "index";
+                return "redirect:/queryAllAuctions";
             } else { //失败
                 model.addAttribute("errorMsg","用户名或密码错误！");
                 return "login";
