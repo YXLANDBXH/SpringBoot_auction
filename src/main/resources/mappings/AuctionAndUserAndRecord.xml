@@ -42,4 +42,43 @@
     order by auctionrecord.auctionPrice desc
   </select>
 
+  <!--查询拍卖已经结束的商品-->
+  <select id="selectAuctionEndTime" resultType="com.xl.domain.AuctionCustomer">
+    SELECT
+    auction.auctionname,
+    auction.auctionstarttime,
+    auction.auctionendtime,
+    auction.auctionstartprice,
+    auctionrecord.auctionprice,
+    `user`.username
+    FROM
+    auction,auctionrecord,`user`
+    WHERE
+    auction.auctionid=auctionrecord.auctionid
+    AND auctionrecord.userid=`user`.userid
+    AND auction.auctionendtime<![CDATA[<]]>NOW()
+    AND auctionrecord.auctionprice=
+    (SELECT MAX(r.auctionprice) FROM auctionrecord r
+    WHERE r.auctionid=auction.auctionid)
+
+  </select>
+
+  <!--查看正在拍卖中的商品-->
+  <select id="selectAuctionNoEndTime" resultMap="auctionMap">
+    SELECT auction.*,
+    auctionrecord.id record_id,
+    auctionrecord.userId record_user_id,
+    auctionrecord.auctionId auction_record_id,
+    auctionrecord.auctionTime,
+    auctionrecord.auctionPrice,
+    `user`.userName
+    FROM
+    auction,auctionrecord,`user`
+    WHERE
+    auction.auctionid=auctionrecord.auctionid
+    AND auctionrecord.userid=`user`.userid
+    AND auction.auctionendtime>NOW()
+
+  </select>
+
 </mapper>

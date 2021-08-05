@@ -58,7 +58,7 @@
 				<li th:text="${auctionDetail.auctionstartprice}"></li>
 				
 				<li class="borderno blue record">
-					<p th:each="record:${auctionDetail.auctionrecodList}">
+					<p th:each="record:${auctionDetail.auctionRecordList}">
 					   <span th:text="${record.user.username}"></span>
 					   &nbsp;&nbsp;
 					   <span th:text="${record.auctionprice}"></span>元

@@ -16,4 +16,12 @@ public interface AuctionService {
     List<Auction> findAuction(Auction auction);
     //根据auctionId查询出竞拍详情
     Auction selectAucAndRecordByAuctionId(String auctionId);
+    //发布拍卖品
+    void publishAuctions(Auction auction);
+    //根据id修改
+    void updateAuctionById(Auction auction);
+    //删除
+    void delAuctionById(String auctionId);
+    //根据id查询信息
+    Auction findAuctionById(String auctionId);
 }

@@ -1,6 +1,7 @@
 package com.xl.service;
 
 import com.xl.domain.Auction;
+import com.xl.domain.AuctionCustomer;
 import com.xl.domain.AuctionCustomerException;
 import com.xl.mapper.AuctionAndUserAndRecord;
 import com.xl.mapper.AuctionRecordMapper;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author XLong
@@ -54,5 +56,15 @@ public class AuctionRecordServiceImpl implements AuctionRecordService {
             }
         }
         this.auctionRecordMapper.insert(auctionRecord);
+    }
+
+    @Override
+    public List<AuctionCustomer> selectAuctionEndTime() {
+        return this.auctionAndUserAndRecord.selectAuctionEndTime();
+    }
+
+    @Override
+    public List<Auction> selectAuctionNoEndTime() {
+        return this.auctionAndUserAndRecord.selectAuctionNoEndTime();
     }
 }

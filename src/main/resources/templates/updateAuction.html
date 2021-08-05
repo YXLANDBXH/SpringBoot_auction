@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script src="/js/WebCalendar.js" type="text/javascript"></script>
+</head>
+
+<body>
+<div class="wrap">
+  <form th:action="@{/updateAuction }" method="post">
+      <div class="zclf login logns">
+        <h1  class="blue">拍卖品修改</h1>
+          <dl>
+            <dd>
+              <label> <small>*</small>名称</label>
+              <input type="hidden" th:value="${auction.auctionid}" name="auctionid"/>
+              <input type="text" class="inputh lf" th:value="${auction.auctionname}" name="auctionname" />
+            </dd>
+            <dd>
+              <label> <small>*</small>描述</label>
+              <input type="text" class="inputh lf" th:value="${auction.auctiondesc}" name="auctiondesc" />
+            </dd>
+            <dd>
+              <label> <small>*</small>开始时间</label>
+              <input type="text" name="auctionstarttime" class="inputh lf" th:value="${#dates.format(auction.auctionstarttime,'yyyy-MM-dd hh:mm:ss')}" readonly onclick="selectDate(this,'yyyy-MM-dd hh:mm:ss')" />
+            </dd>
+            <dd>
+              <label> <small>*</small>结束时间</label>
+              <input type="text" name="auctionendtime" class="inputh lf" th:value="${#dates.format(auction.auctionendtime,'yyyy-MM-dd hh:mm:ss')}" readonly onclick="selectDate(this,'yyyy-MM-dd hh:mm:ss')" />
+            </dd>
+            <dd>
+              <label> <small>*</small>起拍价</label>
+              <input type="text" class="inputh lf" th:value="${auction.auctionstartprice}" name="auctionstartprice" />
+            </dd>
+            <dd class="hegas">
+              <label>&nbsp;</label>
+              <input name="" type="submit" value="修改" class="spbg buttombg f14 lf" />
+              <input name="" type="reset" value="重置" class="spbg buttombg f14 lf" />
+              <span style="color: red;font-size: 18px;font-weight: bold;" th:text="${errorMsg }"></span>
+            </dd>
+          </dl>
+    </div>
+  </form>
+<!-- main end-->
+<!-- footer begin-->
+</div>
+</body>
+</html>

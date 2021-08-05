@@ -76,4 +76,24 @@ public class AuctionServiceImpl implements AuctionService {
         return this.auctionAndUserAndRecord.selectAucAndRecordByAuctionId(auctionId);
     }
 
+    @Override
+    public void publishAuctions(Auction auction) {
+        this.auctionMapper.insert(auction);
+    }
+
+    @Override
+    public void updateAuctionById(Auction auction) {
+        this.auctionMapper.updateByPrimaryKeySelective(auction);
+    }
+
+    @Override
+    public void delAuctionById(String auctionId) {
+        this.auctionMapper.deleteByPrimaryKey(Integer.parseInt(auctionId));
+    }
+
+    @Override
+    public Auction findAuctionById(String auctionId) {
+        return this.auctionMapper.selectByPrimaryKey(Integer.parseInt(auctionId));
+    }
+
 }
